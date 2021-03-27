@@ -1,15 +1,15 @@
 <% content_for :title do %>
-  Editando Kind
+  Editando User
 <% end %>
 
 <div class="page-header">
-  <h1>Updating Kind</h1>
+  <h1>Editando User</h1>
   <div>
-    <%= link_to @kind, class: 'btn btn-info' do %>
+    <%= link_to @user, class: 'btn btn-info' do %>
       <%= icon 'fas', 'eye' %>
       Ver
     <% end %>
-    <%= link_to kinds_path, class: 'btn btn-outline-secondary' do %>
+    <%= link_to users_path, class: 'btn btn-outline-secondary' do %>
       <%= icon 'fas', 'bars' %>
       Voltar
     <% end %>

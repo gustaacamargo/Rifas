@@ -1,0 +1,57 @@
+<% content_for :title do %>
+  Raffles
+<% end %>
+
+<div class="page-header">
+  <h1>Raffles</h1>
+  <%= link_to new_raffle_path, class: 'btn btn-primary' do %>
+    <%= icon 'fas', 'plus' %>
+    Novo Raffle
+  <% end %>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>User</th>
+        <th>Kind</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Probable raffle date</th>
+        <th>Start date sale</th>
+        <th>End date sale</th>
+        <th>Date raffle</th>
+        <th>Ticket value</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @raffles.each do |raffle| %>
+        <tr>
+          <td><%= raffle.user %></td>
+          <td><%= raffle.kind %></td>
+          <td><%= raffle.title %></td>
+          <td><%= raffle.description %></td>
+          <td><%= raffle.probable_raffle_date %></td>
+          <td><%= raffle.start_date_sale %></td>
+          <td><%= raffle.end_date_sale %></td>
+          <td><%= raffle.date_raffle %></td>
+          <td><%= raffle.ticket_value %></td>
+          <td>
+            <%= link_to raffle, class: 'btn btn-info btn-sm' do %>
+              <%= icon 'fas', 'eye', class: 'fa-fw' %>
+            <% end %>
+            <%= link_to edit_raffle_path(raffle), class: 'btn btn-success btn-sm' do %>
+              <%= icon 'fas', 'edit', class: 'fa-fw' %>
+            <% end %>
+            <%= link_to raffle, method: :delete, data: { confirm: 'Você tem certeza?' }, class: 'btn btn-danger btn-sm' do %>
+              <%= icon 'fas', 'times', class: 'fa-fw' %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
