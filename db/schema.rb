@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_27_005702) do
+ActiveRecord::Schema.define(version: 2021_03_27_010805) do
+
+  create_table "awards", force: :cascade do |t|
+    t.integer "raffle_id", null: false
+    t.string "description"
+    t.integer "placing"
+    t.integer "ticket_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["raffle_id"], name: "index_awards_on_raffle_id"
+    t.index ["ticket_id"], name: "index_awards_on_ticket_id"
+  end
 
   create_table "kinds", force: :cascade do |t|
     t.string "description"
@@ -57,6 +68,8 @@ ActiveRecord::Schema.define(version: 2021_03_27_005702) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "awards", "raffles"
+  add_foreign_key "awards", "tickets"
   add_foreign_key "raffles", "kinds"
   add_foreign_key "raffles", "users"
   add_foreign_key "tickets", "raffles"

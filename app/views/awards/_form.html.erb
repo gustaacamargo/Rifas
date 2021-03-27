@@ -1,0 +1,15 @@
+
+<%= simple_form_for @award do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.association :raffle %>
+    <%= f.input :description %>
+    <%= f.input :placing %>
+    <%= f.association :ticket %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, f.object.new_record? ? 'Criar Award' : 'Atualizar Award', class: 'btn btn-primary btn-lg' %>
+  </div>
+<% end %>

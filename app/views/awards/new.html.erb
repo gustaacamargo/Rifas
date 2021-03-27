@@ -1,0 +1,13 @@
+<% content_for :title do %>
+  Novo Award
+<% end %>
+
+<div class="page-header">
+  <h1>Novo Award</h1>
+  <%= link_to awards_path, class: 'btn btn-outline-secondary' do %>
+    <%= icon 'fas', 'bars' %>
+    Voltar
+  <% end %>
+</div>
+
+<%= render 'form' %>
