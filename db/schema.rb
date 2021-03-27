@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 2021_03_27_010805) do
     t.integer "raffle_id", null: false
     t.string "description"
     t.integer "placing"
-    t.integer "ticket_id", null: false
+    t.integer "ticket_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["raffle_id"], name: "index_awards_on_raffle_id"
@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(version: 2021_03_27_010805) do
 
   create_table "tickets", force: :cascade do |t|
     t.integer "raffle_id", null: false
-    t.integer "user_id", null: false
+    t.integer "user_id"
     t.integer "number"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
