@@ -1,0 +1,13 @@
+<% content_for :title do %>
+  Novo Kind
+<% end %>
+
+<div class="page-header">
+  <h1>Novo Kind</h1>
+  <%= link_to kinds_path, class: 'btn btn-outline-secondary' do %>
+    <%= icon 'fas', 'bars' %>
+    Voltar
+  <% end %>
+</div>
+
+<%= render 'form' %>

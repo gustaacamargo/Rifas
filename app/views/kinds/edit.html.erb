@@ -1,0 +1,19 @@
+<% content_for :title do %>
+  Editando Kind
+<% end %>
+
+<div class="page-header">
+  <h1>Editando Kind</h1>
+  <div>
+    <%= link_to @kind, class: 'btn btn-info' do %>
+      <%= icon 'fas', 'eye' %>
+      Ver
+    <% end %>
+    <%= link_to kinds_path, class: 'btn btn-outline-secondary' do %>
+      <%= icon 'fas', 'bars' %>
+      Voltar
+    <% end %>
+  </div>
+</div>
+
+<%= render 'form' %>

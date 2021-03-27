@@ -1,0 +1,32 @@
+<% content_for :title do %>
+  Detalhes de Kind
+<% end %>
+
+<div class="page-header">
+  <h1>Detalhes de Kind</h1>
+  <div>
+    <%= link_to edit_kind_path(@kind), class: 'btn btn-success' do %>
+      <%= icon 'fas', 'edit' %>
+      Editar
+    <% end %>
+    <%= link_to kinds_path, class: 'btn btn-outline-secondary' do %>
+      <%= icon 'fas', 'bars' %>
+      Voltar
+    <% end %>
+  </div>
+</div>
+
+<dl class="dl-horizontal">
+  <dt>Description:</dt>
+  <dd><%= @kind.description %></dd>
+
+  <dt>Initial number:</dt>
+  <dd><%= @kind.initial_number %></dd>
+
+  <dt>Step:</dt>
+  <dd><%= @kind.step %></dd>
+
+  <dt>Number of tickets:</dt>
+  <dd><%= @kind.number_of_tickets %></dd>
+
+</dl>
