@@ -1,0 +1,45 @@
+<% content_for :title do %>
+  Tickets
+<% end %>
+
+<div class="page-header">
+  <h1>Tickets</h1>
+  <%= link_to new_ticket_path, class: 'btn btn-primary' do %>
+    <%= icon 'fas', 'plus' %>
+    Novo Ticket
+  <% end %>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>Raffle</th>
+        <th>User</th>
+        <th>Number</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @tickets.each do |ticket| %>
+        <tr>
+          <td><%= ticket.raffle %></td>
+          <td><%= ticket.user %></td>
+          <td><%= ticket.number %></td>
+          <td>
+            <%= link_to ticket, class: 'btn btn-info btn-sm' do %>
+              <%= icon 'fas', 'eye', class: 'fa-fw' %>
+            <% end %>
+            <%= link_to edit_ticket_path(ticket), class: 'btn btn-success btn-sm' do %>
+              <%= icon 'fas', 'edit', class: 'fa-fw' %>
+            <% end %>
+            <%= link_to ticket, method: :delete, data: { confirm: 'Você tem certeza?' }, class: 'btn btn-danger btn-sm' do %>
+              <%= icon 'fas', 'times', class: 'fa-fw' %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_27_005245) do
+ActiveRecord::Schema.define(version: 2021_03_27_005702) do
 
   create_table "kinds", force: :cascade do |t|
     t.string "description"
@@ -37,6 +37,16 @@ ActiveRecord::Schema.define(version: 2021_03_27_005245) do
     t.index ["user_id"], name: "index_raffles_on_user_id"
   end
 
+  create_table "tickets", force: :cascade do |t|
+    t.integer "raffle_id", null: false
+    t.integer "user_id", null: false
+    t.integer "number"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["raffle_id"], name: "index_tickets_on_raffle_id"
+    t.index ["user_id"], name: "index_tickets_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -49,4 +59,6 @@ ActiveRecord::Schema.define(version: 2021_03_27_005245) do
 
   add_foreign_key "raffles", "kinds"
   add_foreign_key "raffles", "users"
+  add_foreign_key "tickets", "raffles"
+  add_foreign_key "tickets", "users"
 end

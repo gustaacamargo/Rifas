@@ -1,0 +1,29 @@
+<% content_for :title do %>
+  Detalhes de Ticket
+<% end %>
+
+<div class="page-header">
+  <h1>Detalhes de Ticket</h1>
+  <div>
+    <%= link_to edit_ticket_path(@ticket), class: 'btn btn-success' do %>
+      <%= icon 'fas', 'edit' %>
+      Editar
+    <% end %>
+    <%= link_to tickets_path, class: 'btn btn-outline-secondary' do %>
+      <%= icon 'fas', 'bars' %>
+      Voltar
+    <% end %>
+  </div>
+</div>
+
+<dl class="dl-horizontal">
+  <dt>Raffle:</dt>
+  <dd><%= @ticket.raffle %></dd>
+
+  <dt>User:</dt>
+  <dd><%= @ticket.user %></dd>
+
+  <dt>Number:</dt>
+  <dd><%= @ticket.number %></dd>
+
+</dl>
