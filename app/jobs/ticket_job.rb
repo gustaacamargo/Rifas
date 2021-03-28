@@ -5,7 +5,7 @@ class TicketJob < ApplicationJob
   queue_as :tickets
 
   def perform(id)
-    for i in 0..1000 do
+    for i in 1..1000 do
       @ticket = Ticket.new
       @ticket.raffle = Raffle.find(id)
       @ticket.number = i
