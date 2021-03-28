@@ -34,10 +34,17 @@
               <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
             </li>
           </ul>
-          <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-          </form>
+          
+          <p class="navbar-text float-right">
+            <% if user_signed_in? %>
+              Logged in as <strong><%= current_user.name %></strong>.
+              <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
+              <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
+            <% else %>
+              <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
+              <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
+            <% end %>
+          </p>
         </div>
       </div>
     </nav>
