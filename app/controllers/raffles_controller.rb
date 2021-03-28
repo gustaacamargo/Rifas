@@ -34,6 +34,8 @@ class RafflesController < ApplicationController
         format.json { render json: @raffle.errors, status: :unprocessable_entity }
       end
     end
+
+    TicketJob.perform_later(@raffle.id)
   end
 
   # PATCH/PUT /raffles/1 or /raffles/1.json

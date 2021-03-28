@@ -1,3 +1,5 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
   devise_for :users
   resources :awards
@@ -5,8 +7,10 @@ Rails.application.routes.draw do
   resources :raffles
   resources :kinds
   devise_scope :user do
-    root to: 'raffles#index'
     get 'users/sign_out' => "devise/sessions#destroy"
   end
+  root to: 'raffles#index'
+
+  mount Sidekiq::Web => '/sidekiq'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
