@@ -22,7 +22,7 @@ class RafflesController < ApplicationController
   # POST /raffles or /raffles.json
   def create
     @raffle = Raffle.new(raffle_params)
-    @raffle.user = User.find(1)
+    @raffle.user = User.find(current_user.id)
     @raffle.kind = Kind.find(1)
 
     respond_to do |format|
