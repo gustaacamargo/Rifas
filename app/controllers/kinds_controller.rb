@@ -1,5 +1,6 @@
 class KindsController < ApplicationController
   before_action :set_kind, only: %i[ show edit update destroy ]
+  skip_before_action :authenticate_user!, only: [:index, :show]
 
   # GET /kinds or /kinds.json
   def index

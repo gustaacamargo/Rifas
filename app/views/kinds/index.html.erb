@@ -4,10 +4,12 @@
 
 <div class="page-header">
   <h1>Kinds</h1>
-  <%= link_to new_kind_path, class: 'btn btn-primary' do %>
-    <%= icon 'fas', 'plus' %>
-    New Kind
-  <% end %>
+  <% if user_signed_in? %>
+    <%= link_to new_kind_path, class: 'btn btn-primary' do %>
+      <%= icon 'fas', 'plus' %>
+      New Kind
+    <% end %>
+  <% end %>  
 </div>
 
 <div class="table-responsive">
@@ -33,11 +35,13 @@
             <%= link_to kind, class: 'btn btn-info btn-sm' do %>
               <%= icon 'fas', 'eye', class: 'fa-fw' %>
             <% end %>
-            <%= link_to edit_kind_path(kind), class: 'btn btn-success btn-sm' do %>
-              <%= icon 'fas', 'edit', class: 'fa-fw' %>
-            <% end %>
-            <%= link_to kind, method: :delete, data: { confirm: 'Você tem certeza?' }, class: 'btn btn-danger btn-sm' do %>
-              <%= icon 'fas', 'times', class: 'fa-fw' %>
+            <% if user_signed_in? %>
+              <%= link_to edit_kind_path(kind), class: 'btn btn-success btn-sm' do %>
+                <%= icon 'fas', 'edit', class: 'fa-fw' %>
+              <% end %>
+              <%= link_to kind, method: :delete, data: { confirm: 'Você tem certeza?' }, class: 'btn btn-danger btn-sm' do %>
+                <%= icon 'fas', 'times', class: 'fa-fw' %>
+              <% end %>
             <% end %>
           </td>
         </tr>
