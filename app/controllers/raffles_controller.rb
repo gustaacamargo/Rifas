@@ -8,6 +8,7 @@ class RafflesController < ApplicationController
 
   # GET /raffles/1 or /raffles/1.json
   def show
+    @tickets = @raffle.ticket.paginate(page: params[:page], per_page: 100)
   end
 
   # GET /raffles/new
@@ -63,7 +64,7 @@ class RafflesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_raffle
-      @raffle = Raffle.find_by(id: params[:id], user_id: current_user.id)
+      @raffle = Raffle.includes(:ticket).find_by(id: params[:id], user_id: current_user.id)
     end
 
     # Only allow a list of trusted parameters through.

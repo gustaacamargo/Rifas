@@ -41,4 +41,31 @@
   <dt>Ticket value:</dt>
   <dd><%= @raffle.ticket_value %></dd>
 
+  <dt>Tickets</dt>
+  <dd>
+    <div class="table-responsive mt-2">
+      <table class="table table-striped table-bordered table-hover">
+        <thead>
+          <tr>
+            <th>Number</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @tickets.each do |ticket| %>
+            <tr>
+              <td><%= ticket.number %></td>
+              <% if ticket.number.zero? %>
+                <td>Sold</td>
+              <% else %>
+                <td>Unsold</td>
+              <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <%= will_paginate @tickets, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
+  </dd>  
 </dl>
