@@ -10,13 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_28_020728) do
+ActiveRecord::Schema.define(version: 2021_03_27_010805) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "awards", force: :cascade do |t|
-    t.integer "raffle_id", null: false
+    t.bigint "raffle_id", null: false
     t.string "description"
     t.integer "placing"
-    t.integer "ticket_id"
+    t.bigint "ticket_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["raffle_id"], name: "index_awards_on_raffle_id"
@@ -33,8 +36,8 @@ ActiveRecord::Schema.define(version: 2021_03_28_020728) do
   end
 
   create_table "raffles", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "kind_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "kind_id", null: false
     t.string "title"
     t.text "description"
     t.datetime "probable_raffle_date"
@@ -49,8 +52,8 @@ ActiveRecord::Schema.define(version: 2021_03_28_020728) do
   end
 
   create_table "tickets", force: :cascade do |t|
-    t.integer "raffle_id", null: false
-    t.integer "user_id"
+    t.bigint "raffle_id", null: false
+    t.bigint "user_id"
     t.integer "number"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
