@@ -13,7 +13,15 @@
     <%= f.input :ticket_value %>
   </div>
 
+  <div id='awards'>
+    <%= f.simple_fields_for :awards do |award| %>
+      <%= render 'award_fields', :f => award %>
+    <% end %>
+  <div class='links'>
+    <%= link_to_add_association 'Add award', f, :awards, class: 'btn btn-primary btn-lg mb-4' %>
+  </div>
+
   <div class="form-actions">
-    <%= f.button :submit, f.object.new_record? ? 'Criar Raffle' : 'Atualizar Raffle', class: 'btn btn-primary btn-lg' %>
+    <%= f.button :submit, f.object.new_record? ? 'Create Raffle' : 'Update Raffle', class: 'btn btn-primary btn-lg' %>
   </div>
 <% end %>

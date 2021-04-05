@@ -14,6 +14,7 @@ class RafflesController < ApplicationController
   # GET /raffles/new
   def new
     @raffle = Raffle.new
+    @raffle.awards.build
   end
 
   # GET /raffles/1/edit
@@ -69,6 +70,8 @@ class RafflesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def raffle_params
-      params.require(:raffle).permit(:user_id, :kind_id, :title, :description, :probable_raffle_date, :start_date_sale, :end_date_sale, :date_raffle, :ticket_value)
+      params.require(:raffle).permit(:user_id, :kind_id, :title, :description, :probable_raffle_date, :start_date_sale, :end_date_sale, :date_raffle, :ticket_value,
+        awards_attributes: [:id, :description, :placing, :_destroy]
+      )
     end
 end
