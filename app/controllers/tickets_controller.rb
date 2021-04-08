@@ -37,12 +37,17 @@ class TicketsController < ApplicationController
   # PATCH/PUT /tickets/1 or /tickets/1.json
   def update
     respond_to do |format|
-      if @ticket.update(ticket_params)
-        format.html { redirect_to @ticket, notice: "Ticket was successfully updated." }
-        format.json { render :show, status: :ok, location: @ticket }
+      if !@ticket.user_id?
+        if @ticket.update(ticket_params)
+          format.html { redirect_to @ticket, notice: "Ticket was successfully updated." }
+          format.json { render :show, status: :ok, location: @ticket }
+        else
+          format.html { render :edit, status: :unprocessable_entity }
+          format.json { render json: @ticket.errors, status: :unprocessable_entity }
+        end
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @ticket.errors, status: :unprocessable_entity }
+        format.json { render json: { error: 'Ticket already solded' }, status: :unprocessable_entity }
       end
     end
   end

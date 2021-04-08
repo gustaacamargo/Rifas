@@ -10,6 +10,7 @@ import "channels"
 import "./stylesheets/application"
 import "bootstrap"
 import "cocoon-js"
+import "./modal"
 
 Rails.start()
 Turbolinks.start()

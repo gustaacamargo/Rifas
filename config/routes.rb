@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   devise_scope :user do
     get 'users/sign_out' => "devise/sessions#destroy"
   end
+  get '/modal/:id/:ticketId', to: 'raffles#modal'
   root to: 'raffles#index'
 
   mount Sidekiq::Web => '/sidekiq'

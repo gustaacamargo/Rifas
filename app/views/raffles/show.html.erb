@@ -72,18 +72,24 @@
           <tr>
             <th>Number</th>
             <th>Status</th>
+            <th>Action</th>
           </tr>
         </thead>
 
         <tbody>
-          <% @tickets.each do |ticket| %>
+          <% @tickets.each_with_index do |ticket, index| %>
             <tr>
               <td><%= ticket.number %></td>
-              <% if ticket.number.zero? %>
+              <% if ticket.user_id? %>
                 <td>Sold</td>
               <% else %>
                 <td>Unsold</td>
               <% end %>
+              <td>
+                <button <% if ticket.user_id? %> disabled  <% end %> class="btn btn-primary open-modal" id="ticket-<%= ticket.id %> raffle-<%= @raffle.id %>">
+                  Buy
+                </button>
+              </td>
             </tr>
           <% end %>
         </tbody>
@@ -92,3 +98,4 @@
     <%= will_paginate @tickets, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
   </dd>  
 </dl>
+<div id="modal-placeholder"></div>
