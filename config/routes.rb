@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     get 'users/sign_out' => "devise/sessions#destroy"
   end
   get '/modal/:id/:ticketId', to: 'raffles#modal'
-  root to: 'raffles#index'
+  root to: 'home#index'
 
   mount Sidekiq::Web => '/sidekiq'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
