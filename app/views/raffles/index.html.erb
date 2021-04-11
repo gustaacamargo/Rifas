@@ -16,6 +16,7 @@
       <tr>
         <th>Kind</th>
         <th>Title</th>
+        <th>Owner</th>
         <th>Description</th>
         <th>Probable raffle date</th>
         <th>Start date sale</th>
@@ -31,6 +32,7 @@
         <tr>
           <td><%= raffle.kind %></td>
           <td><%= raffle.title %></td>
+          <td><%= raffle.user.name %></td>
           <td><%= raffle.description %></td>
           <td><%= raffle.probable_raffle_date %></td>
           <td><%= raffle.start_date_sale %></td>

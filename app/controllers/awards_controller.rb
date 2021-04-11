@@ -4,6 +4,7 @@ class AwardsController < ApplicationController
   # GET /awards or /awards.json
   def index
     @awards = Award.all
+                .includes(:raffle, :ticket)
   end
 
   # GET /awards/1 or /awards/1.json

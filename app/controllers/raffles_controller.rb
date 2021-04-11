@@ -3,7 +3,8 @@ class RafflesController < ApplicationController
 
   # GET /raffles or /raffles.json
   def index
-    @raffles = Raffle.where(user_id: current_user.id)
+    @raffles = Raffle.all
+                .includes(:user, :kind, :tickets, :awards)
   end
 
   # GET /raffles/1 or /raffles/1.json

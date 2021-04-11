@@ -19,7 +19,7 @@
             <td><%= ticket.raffle %></td>
             <td><%= ticket.number %></td>
             <td><%= ticket.raffle.probable_raffle_date.to_s(:short) %></td>
-            <% if ticket.award %>
+            <% if !ticket.award.nil? %>
                 <td>Winner</td>
             <% else %>
                 <td>It wasn't this time</td>
