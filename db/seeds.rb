@@ -33,7 +33,6 @@ end
     1000.times do |index|
         Ticket.create(
             raffle: raffle,
-            user: raffle.user,
             number: index + 1,
         )
     end

@@ -64,7 +64,7 @@ class RafflesController < ApplicationController
   end
 
   def modal
-    @raffle = Raffle.includes(:tickets).find_by(id: params[:id], user_id: current_user.id)
+    @raffle = Raffle.includes(:tickets).find_by(id: params[:id])
     @ticket = Ticket.find_by(id: params[:ticketId].to_i)
 
     render :modal, layout: false
@@ -73,7 +73,7 @@ class RafflesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_raffle
-      @raffle = Raffle.includes(:tickets, :awards).find_by(id: params[:id], user_id: current_user.id)
+      @raffle = Raffle.includes(:tickets, :awards).find_by(id: params[:id])
     end
 
     # Only allow a list of trusted parameters through.
