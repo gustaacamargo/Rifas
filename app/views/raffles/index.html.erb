@@ -34,10 +34,14 @@
           <td><%= raffle.title %></td>
           <td><%= raffle.user.name %></td>
           <td><%= raffle.description %></td>
-          <td><%= raffle.probable_raffle_date %></td>
-          <td><%= raffle.start_date_sale %></td>
-          <td><%= raffle.end_date_sale %></td>
-          <td><%= raffle.date_raffle %></td>
+          <td><%= raffle.probable_raffle_date.to_s(:short) %></td>
+          <td><%= raffle.start_date_sale.to_s(:short) %></td>
+          <td><%= raffle.end_date_sale.to_s(:short) %></td>
+          <td>
+            <% if raffle.date_raffle? %>
+              <%= raffle.date_raffle.to_s(:short) %>
+            <% end %>
+          </td>
           <td><%= raffle.ticket_value %></td>
           <td>
             <%= link_to raffle, class: 'btn btn-info btn-sm' do %>
