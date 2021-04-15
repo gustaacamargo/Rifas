@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const setEventListenerBuy = (modal) => {
+const setEventListenerBuy = (modal, btn, ticketId) => {
     const button = document.querySelector("#buy-button");
     if (!button) return;
     button.addEventListener("click", () => {
@@ -13,6 +13,9 @@ const setEventListenerBuy = (modal) => {
             },
         })
         .then((response) => {
+            let status = document.querySelector(`#ticketstatus-${ticketId}`)
+            status.textContent = "Sold"
+            btn.disabled = true
             if(response.status === 200) modal.toggle()
         })
         .catch((error) => {

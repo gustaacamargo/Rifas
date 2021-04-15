@@ -1,6 +1,6 @@
 class KindsController < ApplicationController
-  before_action :set_kind, only: %i[ show edit update destroy ]
-  skip_before_action :authenticate_user!, only: [:index, :show]
+  before_action :authorize_admin, :set_kind, only: %i[ show new create edit update destroy ]
+  skip_before_action :authenticate_user!, only: [:index]
 
   # GET /kinds or /kinds.json
   def index
@@ -66,5 +66,10 @@ class KindsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def kind_params
       params.require(:kind).permit(:description, :initial_number, :step, :number_of_tickets)
+    end
+
+    def authorize_admin
+      return unless :is_admin?
+      redirect_to root_path, alert: 'Admins only!'
     end
 end

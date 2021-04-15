@@ -81,12 +81,15 @@
             <tr>
               <td><%= ticket.number %></td>
               <% if ticket.user_id? %>
-                <td>Sold</td>
+                <td id="ticketstatus-<%= ticket.id %>">Sold</td>
               <% else %>
-                <td>Unsold</td>
+                <td id="ticketstatus-<%= ticket.id %>">Unsold</td>
               <% end %>
               <td>
-                <button <% if ticket.user_id? %> disabled  <% end %> class="btn btn-primary open-modal" id="ticket-<%= ticket.id %> raffle-<%= @raffle.id %>">
+                <button <% if ticket.user_id? %> disabled  <% end %> 
+                    class="btn btn-primary open-modal" 
+                    data-ticket="<%= ticket.id %>" 
+                    data-raffle="<%= @raffle.id %>">
                   Buy
                 </button>
               </td>
