@@ -17,10 +17,11 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 
-        <%= simple_form_for @ticket, method: :put, remote: true do |f| %>
-          <%= f.association :user, :as => :hidden, :input_html => { :value => current_user.id } %>
-          <%= f.button :submit, 'Buy', class: 'btn btn-primary btn-md mb-3' %>
-        <% end %>
+        <button
+          id="buy-button"
+          type="button"
+          class="btn btn-primary btn-md"
+          data-url="<%= buy_api_v1_ticket_path(@ticket) %>">Buy</button>
       </div>
     </div>
   </div>

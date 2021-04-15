@@ -1,7 +1,8 @@
 import axios from "axios"
 import { Modal } from "bootstrap"
+import setEventListenerBuy from "../controllers/tickets/buy"
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("turbolinks:load", () => {
     document.querySelectorAll(".open-modal").forEach(button => {
         let ticketId = button.id.split(" ")[0].split("-")[1]
         let raffleId = button.id.split(" ")[1].split("-")[1]
@@ -13,6 +14,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     keyboard: false
                 })
                 myModal.show()
+                setTimeout(() => {
+                    setEventListenerBuy(myModal)
+                }, 750);
             })
         })
     })

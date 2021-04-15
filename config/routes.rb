@@ -1,6 +1,13 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  namespace :api do
+    namespace :v1 do
+      resources :tickets, only: [] do
+        get :buy, on: :member
+      end
+    end
+  end
   devise_for :users
   resources :awards
   resources :tickets
