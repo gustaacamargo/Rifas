@@ -4,7 +4,7 @@
 
 <div class="page-header">
   <h1>Kinds</h1>
-  <% if user_signed_in? %>
+  <% if is_admin? %>
     <%= link_to new_kind_path, class: 'btn btn-primary' do %>
       <%= icon 'fas', 'plus' %>
       New Kind
@@ -20,7 +20,10 @@
         <th>Initial number</th>
         <th>Step</th>
         <th>Number of tickets</th>
-        <th></th>
+        <% if is_admin? %>
+          <th></th>
+        <% end %>  
+        
       </tr>
     </thead>
 
@@ -31,19 +34,21 @@
           <td><%= kind.initial_number %></td>
           <td><%= kind.step %></td>
           <td><%= kind.number_of_tickets %></td>
-          <td>
-            <%= link_to kind, class: 'btn btn-info btn-sm' do %>
-              <%= icon 'fas', 'eye', class: 'fa-fw' %>
-            <% end %>
-            <% if user_signed_in? %>
-              <%= link_to edit_kind_path(kind), class: 'btn btn-success btn-sm' do %>
-                <%= icon 'fas', 'edit', class: 'fa-fw' %>
+          <% if is_admin? %>
+            <td>
+              <%= link_to kind, class: 'btn btn-info btn-sm' do %>
+                <%= icon 'fas', 'eye', class: 'fa-fw' %>
               <% end %>
-              <%= link_to kind, method: :delete, data: { confirm: 'Você tem certeza?' }, class: 'btn btn-danger btn-sm' do %>
-                <%= icon 'fas', 'times', class: 'fa-fw' %>
+              <% if user_signed_in? %>
+                <%= link_to edit_kind_path(kind), class: 'btn btn-success btn-sm' do %>
+                  <%= icon 'fas', 'edit', class: 'fa-fw' %>
+                <% end %>
+                <%= link_to kind, method: :delete, data: { confirm: 'Você tem certeza?' }, class: 'btn btn-danger btn-sm' do %>
+                  <%= icon 'fas', 'times', class: 'fa-fw' %>
+                <% end %>
               <% end %>
-            <% end %>
-          </td>
+            </td>
+          <% end %>  
         </tr>
       <% end %>
     </tbody>

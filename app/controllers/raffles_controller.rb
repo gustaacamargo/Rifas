@@ -25,8 +25,7 @@ class RafflesController < ApplicationController
   # POST /raffles or /raffles.json
   def create
     @raffle = Raffle.new(raffle_params)
-    @raffle.user = User.find(current_user.id)
-    @raffle.kind = Kind.find(1)
+    @raffle.user = current_user
 
     respond_to do |format|
       if @raffle.save
@@ -38,7 +37,7 @@ class RafflesController < ApplicationController
       end
     end
 
-    TicketJob.perform_later(@raffle.id)
+    TicketJob.perform_later(@raffle.id,  @raffle.kind)
   end
 
   # PATCH/PUT /raffles/1 or /raffles/1.json

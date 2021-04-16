@@ -1,4 +1,5 @@
 class AwardsController < ApplicationController
+  before_action :authorize_admin
   before_action :set_award, only: %i[ show edit update destroy ]
 
   # GET /awards or /awards.json

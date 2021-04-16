@@ -8,6 +8,12 @@ class ApplicationController < ActionController::Base
         signed_in? ? current_user.admin : false
     end
 
+    def authorize_admin
+        unless current_user.admin
+          redirect_to root_path, alert: 'Admins only!'
+        end
+    end
+
     protected
     def configure_permitted_parameters
         devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :email, :password, :photo])
