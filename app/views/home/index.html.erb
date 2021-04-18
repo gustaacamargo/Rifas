@@ -2,60 +2,86 @@
   Home
 <% end %>
 
-<h3>Rifles</h3>
-<div class="table-responsive">
-  <table class="table table-striped table-bordered table-hover">
-    <thead>
-      <tr>
-        <th>Raffle</th>
-        <th>Number</th>
-        <th>Probable raffle date</th>
-        <th>Status</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @raffled_tickets.each do |ticket| %>
+<% if @your_raffles.length > 0 %>
+  <h3>Your Raffles</h3>
+  <div class="table-responsive">
+    <table class="table table-striped table-bordered table-hover">
+      <thead>
         <tr>
-          <td><%= ticket.raffle %></td>
-          <td><%= ticket.number %></td>
-          <td><%= ticket.raffle.probable_raffle_date.to_s(:short) %></td>
-          <% if !ticket.award.nil? %>
-              <td>Winner</td>
-          <% else %>
-              <td>It wasn't this time</td>
-          <% end %>
+          <th>Raffle</th>
+          <th>Probable raffle date</th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
-</div>
+      </thead>
 
+      <tbody>
+        <% @your_raffles.each do |raffle| %>
+          <tr>
+            <td><%= raffle %></td>
+            <td><%= raffle.probable_raffle_date.to_s(:short) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% end %>
 
-<h3 class="mt-4">Not raffled</h3>
-<div class="table-responsive">
-  <table class="table table-striped table-bordered table-hover">
-    <thead>
-      <tr>
-        <th>Raffle</th>
-        <th>Number</th>
-        <th>Probable raffle date</th>
-        <th>Days left until the raffle</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @raffled_not_tickets.each do |ticket| %>
+<% if @raffled_tickets.length > 0 %>
+  <h3>Rifles</h3>
+  <div class="table-responsive">
+    <table class="table table-striped table-bordered table-hover">
+      <thead>
         <tr>
-          <td><%= ticket.raffle %></td>
-          <td><%= ticket.number %></td>
-          <td><%= ticket.raffle.probable_raffle_date.to_s(:short) %></td>
-          <td><%= distance_of_time_in_words_to_now(ticket.raffle.probable_raffle_date)  %></td>
+          <th>Raffle</th>
+          <th>Number</th>
+          <th>Probable raffle date</th>
+          <th>Status</th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
-</div>
+      </thead>
+
+      <tbody>
+        <% @raffled_tickets.each do |ticket| %>
+          <tr>
+            <td><%= ticket.raffle %></td>
+            <td><%= ticket.number %></td>
+            <td><%= ticket.raffle.probable_raffle_date.to_s(:short) %></td>
+            <% if !ticket.award.nil? %>
+                <td>Winner</td>
+            <% else %>
+                <td>It wasn't this time</td>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% end %>
+
+<% if @raffled_not_tickets.length > 0 %>
+  <h3 class="mt-4">Not raffled</h3>
+  <div class="table-responsive">
+    <table class="table table-striped table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>Raffle</th>
+          <th>Number</th>
+          <th>Probable raffle date</th>
+          <th>Days left until the raffle</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @raffled_not_tickets.each do |ticket| %>
+          <tr>
+            <td><%= ticket.raffle %></td>
+            <td><%= ticket.number %></td>
+            <td><%= ticket.raffle.probable_raffle_date.to_s(:short) %></td>
+            <td><%= distance_of_time_in_words_to_now(ticket.raffle.probable_raffle_date)  %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% end %>
 
 <h5 class="mt-4">Infos</h5>
 <div class="table-responsive">

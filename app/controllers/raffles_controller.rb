@@ -1,10 +1,10 @@
 class RafflesController < ApplicationController
-  before_action :set_raffle, only: %i[ show edit update destroy ]
+  before_action :set_raffle_with_user, only: %i[ edit update destroy ]
+  before_action :set_raffle, only: %i[ show ]
 
   # GET /raffles or /raffles.json
   def index
-    @raffles = Raffle.all
-                .includes(:user, :kind, :tickets, :awards)
+    @raffles = Raffle.all.includes(:user, :kind, :tickets, :awards)
   end
 
   # GET /raffles/1 or /raffles/1.json
@@ -73,6 +73,13 @@ class RafflesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_raffle
       @raffle = Raffle.includes(:tickets, :awards).find_by(id: params[:id])
+    end
+
+    def set_raffle_with_user
+      @raffle = Raffle.includes(:tickets, :awards).find_by({id: params[:id], user: current_user.id})
+      unless @raffle
+        redirect_to root_path, alert: "You don't have permission to do this!"
+      end
     end
 
     # Only allow a list of trusted parameters through.

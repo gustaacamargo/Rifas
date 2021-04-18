@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
     protect_from_forgery with: :exception
     before_action :authenticate_user!
     before_action :configure_permitted_parameters, if: :devise_controller?
-    helper_method :is_admin?
+    helper_method :is_admin?, :authorize_admin
 
     def is_admin?
         signed_in? ? current_user.admin : false

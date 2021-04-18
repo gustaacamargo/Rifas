@@ -47,12 +47,14 @@
             <%= link_to raffle, class: 'btn btn-info btn-sm' do %>
               <%= icon 'fas', 'eye', class: 'fa-fw' %>
             <% end %>
-            <%= link_to edit_raffle_path(raffle), class: 'btn btn-success btn-sm' do %>
-              <%= icon 'fas', 'edit', class: 'fa-fw' %>
-            <% end %>
-            <%= link_to raffle, method: :delete, data: { confirm: 'Você tem certeza?' }, class: 'btn btn-danger btn-sm' do %>
-              <%= icon 'fas', 'times', class: 'fa-fw' %>
-            <% end %>
+            <% if raffle.user == current_user %>
+              <%= link_to edit_raffle_path(raffle), class: 'btn btn-success btn-sm' do %>
+                <%= icon 'fas', 'edit', class: 'fa-fw' %>
+              <% end %>
+              <%= link_to raffle, method: :delete, data: { confirm: 'Você tem certeza?' }, class: 'btn btn-danger btn-sm' do %>
+                <%= icon 'fas', 'times', class: 'fa-fw' %>
+              <% end %>
+            <% end %> 
           </td>
         </tr>
       <% end %>
