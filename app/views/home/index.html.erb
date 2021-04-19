@@ -10,7 +10,8 @@
         <tr>
           <th>Raffle</th>
           <th>Probable raffle date</th>
-          <th></th>
+          <th>Raffled</th>
+          <td></td>
         </tr>
       </thead>
 
@@ -19,14 +20,16 @@
           <tr>
             <td><%= raffle %></td>
             <td><%= raffle.probable_raffle_date.to_s(:short) %></td>
-            <td>
-            <% if raffle.draw_allowed? %>
-              <button class="btn btn-primary btn-sm raffle-action" data-url="<%= raffle_api_v1_raffle_path(raffle) %>">
-                Raffle
-              </button>
+            <% if raffle.date_raffle.nil? %>
+                <td>No</td>
+            <% else %>
+                <td>Yes</td>
             <% end %>
+            <td>
+              <%= link_to raffle, class: 'btn btn-info btn-sm' do %>
+                <%= icon 'fas', 'eye', class: 'fa-fw' %>
+              <% end %>
             </td>
-            
           </tr>
         <% end %>
       </tbody>
@@ -35,7 +38,7 @@
 <% end %>
 
 <% if @raffled_tickets.length > 0 %>
-  <h3>Rifles</h3>
+  <h3>Raffled</h3>
   <div class="table-responsive">
     <table class="table table-striped table-bordered table-hover">
       <thead>

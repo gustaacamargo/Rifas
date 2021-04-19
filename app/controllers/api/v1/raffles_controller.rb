@@ -1,5 +1,5 @@
 class Api::V1::RafflesController < Api::V1::ApplicationController
-  # before_action :authenticate_user!
+  before_action :authenticate_user!
   before_action :set_raffle, only: [:raffle]
 
   def raffle
@@ -32,6 +32,6 @@ class Api::V1::RafflesController < Api::V1::ApplicationController
 
   private
   def set_raffle
-    @raffle = Raffle.includes(:tickets, :awards).where("raffles.id = ? and tickets.user_id is not null", params[:id]).references(:tickets)[0]
+    @raffle = Raffle.includes(:tickets, { awards: [ { ticket: [:user] }] }).where("raffles.id = ? and tickets.user_id is not null and raffles.user_id = ?", params[:id], current_user.id).references(:tickets)[0]
   end
 end

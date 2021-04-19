@@ -5,6 +5,11 @@
 <div class="page-header">
   <h1>Details of Raffle</h1>
   <div>
+   <% if @raffle.user == current_user && @raffle.draw_allowed? %>
+      <button class="btn btn-primary raffle-action" data-url="<%= raffle_api_v1_raffle_path(@raffle) %>">
+        Raffle
+      </button>
+    <% end %> 
     <%= link_to edit_raffle_path(@raffle), class: 'btn btn-success' do %>
       <%= icon 'fas', 'edit' %>
       Edit
@@ -40,6 +45,9 @@
     <dd><%= @raffle.date_raffle.to_s(:short) %></dd>
   <% end %>
 
+  <dt id="title-date-raffle" class="d-none">Date raffle:</dt>
+  <dd id="value-date-raffle" class="d-none"></dd>
+
   <dt>Ticket value:</dt>
   <dd><%= @raffle.ticket_value %></dd>
 
@@ -48,7 +56,7 @@
     <div class="table-responsive mt-2">
       <table class="table table-striped table-bordered table-hover">
         <thead>
-          <tr>
+          <tr id="head-awards">
             <th>Description</th>
             <th>Placing</th>
             <% if !@raffle.date_raffle.nil? %>
@@ -60,7 +68,7 @@
 
         <tbody>
           <% @raffle.awards.each do |award| %>
-            <tr>
+            <tr id="body-awards-<%= award.id %>">
               <td><%= award.description %></td>
               <td><%= award.placing %></td>
               <% if !@raffle.date_raffle.nil? %>
@@ -83,7 +91,7 @@
             <th>Number</th>
             <th>Status</th>
             <% if @raffle.started_sale? && !@raffle.closed_sale? %>
-              <th>Action</th>
+              <th class="head-action-awards">Action</th>
             <% end %>
           </tr>
         </thead>
@@ -98,7 +106,7 @@
                 <td id="ticketstatus-<%= ticket.id %>">Unsold</td>
               <% end %>
               <% if @raffle.started_sale? && !@raffle.closed_sale? %>
-                <td>
+                <td class="body-action-awards">
                   <button <% if ticket.user_id? %> disabled  <% end %> 
                       class="btn btn-primary open-modal" 
                       data-ticket="<%= ticket.id %>" 

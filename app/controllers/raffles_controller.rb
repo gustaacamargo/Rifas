@@ -4,7 +4,7 @@ class RafflesController < ApplicationController
 
   # GET /raffles or /raffles.json
   def index
-    @raffles = Raffle.all.includes(:user, :kind, :tickets, :awards)
+    @raffles = Raffle.all.includes(:user, :kind, :tickets, :awards).order(created_at: :desc).paginate(page: params[:page], per_page: 25)
   end
 
   # GET /raffles/1 or /raffles/1.json
