@@ -10,6 +10,25 @@ class Raffle < ApplicationRecord
     title
   end
 
+  def datetime_now 
+    datetime_now = DateTime.parse(Time.now.to_s).strftime('%Y%m%d%H%M%S')
+  end
+
+  def started_sale?
+    date_of_start_sale = DateTime.parse(start_date_sale.to_s).strftime('%Y%m%d%H%M%S')
+    date_of_start_sale > datetime_now
+  end
+
+  def closed_sale?
+    date_of_end_sale = DateTime.parse(end_date_sale.to_s).strftime('%Y%m%d%H%M%S')
+    date_of_end_sale > datetime_now
+  end
+
+  def draw_allowed?
+    date_of_probable_raffle = DateTime.parse(probable_raffle_date.to_s).strftime('%Y%m%d%H%M%S')
+    date_of_probable_raffle < datetime_now && date_raffle.nil?
+  end
+
   private
   def at_least_one_award
     # when creating a new contact: making sure at least one team exists

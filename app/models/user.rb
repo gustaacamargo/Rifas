@@ -5,4 +5,8 @@ class User < ApplicationRecord
   has_many :raffles
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
+  def to_s
+    name
+  end
 end

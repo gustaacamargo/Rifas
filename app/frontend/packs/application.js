@@ -11,6 +11,7 @@ import "./stylesheets/application"
 import "bootstrap"
 import "cocoon-js"
 import "./modal"
+import "./controllers/raffles/raffle"
 
 Rails.start()
 Turbolinks.start()

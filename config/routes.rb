@@ -6,6 +6,9 @@ Rails.application.routes.draw do
       resources :tickets, only: [] do
         get :buy, on: :member
       end
+      resources :raffles, only: [] do
+        get :raffle, on: :member
+      end
     end
   end
   devise_for :users

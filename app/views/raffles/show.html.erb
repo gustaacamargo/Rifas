@@ -27,16 +27,18 @@
   <dd><%= @raffle.description %></dd>
 
   <dt>Probable raffle date:</dt>
-  <dd><%= @raffle.probable_raffle_date %></dd>
+  <dd><%= @raffle.probable_raffle_date.to_s(:short) %></dd>
 
   <dt>Start date sale:</dt>
-  <dd><%= @raffle.start_date_sale %></dd>
+  <dd><%= @raffle.start_date_sale.to_s(:short) %></dd>
 
   <dt>End date sale:</dt>
-  <dd><%= @raffle.end_date_sale %></dd>
+  <dd><%= @raffle.end_date_sale.to_s(:short) %></dd>
 
-  <dt>Date raffle:</dt>
-  <dd><%= @raffle.date_raffle %></dd>
+  <% if !@raffle.date_raffle.nil? %>
+    <dt>Date raffle:</dt>
+    <dd><%= @raffle.date_raffle.to_s(:short) %></dd>
+  <% end %>
 
   <dt>Ticket value:</dt>
   <dd><%= @raffle.ticket_value %></dd>
@@ -49,6 +51,10 @@
           <tr>
             <th>Description</th>
             <th>Placing</th>
+            <% if !@raffle.date_raffle.nil? %>
+              <th>Winner</th>
+              <th>Winning ticket</th>
+            <% end %>
           </tr>
         </thead>
 
@@ -57,6 +63,10 @@
             <tr>
               <td><%= award.description %></td>
               <td><%= award.placing %></td>
+              <% if !@raffle.date_raffle.nil? %>
+                <td><%= award.ticket.user %></td>
+                <td><%= award.ticket %></td>
+              <% end %>
             </tr>
           <% end %>
         </tbody>
@@ -72,7 +82,9 @@
           <tr>
             <th>Number</th>
             <th>Status</th>
-            <th>Action</th>
+            <% if @raffle.started_sale? && !@raffle.closed_sale? %>
+              <th>Action</th>
+            <% end %>
           </tr>
         </thead>
 
@@ -85,14 +97,16 @@
               <% else %>
                 <td id="ticketstatus-<%= ticket.id %>">Unsold</td>
               <% end %>
-              <td>
-                <button <% if ticket.user_id? %> disabled  <% end %> 
-                    class="btn btn-primary open-modal" 
-                    data-ticket="<%= ticket.id %>" 
-                    data-raffle="<%= @raffle.id %>">
-                  Buy
-                </button>
-              </td>
+              <% if @raffle.started_sale? && !@raffle.closed_sale? %>
+                <td>
+                  <button <% if ticket.user_id? %> disabled  <% end %> 
+                      class="btn btn-primary open-modal" 
+                      data-ticket="<%= ticket.id %>" 
+                      data-raffle="<%= @raffle.id %>">
+                    Buy
+                  </button>
+                </td>
+              <% end %>
             </tr>
           <% end %>
         </tbody>
