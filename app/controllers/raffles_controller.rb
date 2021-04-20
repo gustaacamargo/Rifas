@@ -29,6 +29,7 @@ class RafflesController < ApplicationController
 
     respond_to do |format|
       if @raffle.save
+        TicketJob.perform_later(@raffle)
         format.html { redirect_to @raffle, notice: "Raffle was successfully created." }
         format.json { render :show, status: :created, location: @raffle }
       else
@@ -36,8 +37,6 @@ class RafflesController < ApplicationController
         format.json { render json: @raffle.errors, status: :unprocessable_entity }
       end
     end
-
-    TicketJob.perform_later(@raffle)
   end
 
   # PATCH/PUT /raffles/1 or /raffles/1.json
