@@ -1,8 +1,8 @@
 class Raffle < ApplicationRecord
   belongs_to :user
   belongs_to :kind
-  has_many :tickets, dependent: :destroy
   has_many :awards, dependent: :destroy
+  has_many :tickets, dependent: :destroy
   accepts_nested_attributes_for :awards, reject_if: :all_blank, allow_destroy: true
   validate :at_least_one_award
 
@@ -10,18 +10,18 @@ class Raffle < ApplicationRecord
     title
   end
 
-  def datetime_now 
+  def datetime_now
     datetime_now = DateTime.parse(Time.now.to_s).strftime('%Y%m%d%H%M%S')
   end
 
   def started_sale?
     date_of_start_sale = DateTime.parse(start_date_sale.to_s).strftime('%Y%m%d%H%M%S')
-    date_of_start_sale > datetime_now
+    datetime_now > date_of_start_sale 
   end
 
   def closed_sale?
     date_of_end_sale = DateTime.parse(end_date_sale.to_s).strftime('%Y%m%d%H%M%S')
-    date_of_end_sale > datetime_now
+    date_of_end_sale < datetime_now
   end
 
   def draw_allowed?
