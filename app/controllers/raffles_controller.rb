@@ -37,7 +37,7 @@ class RafflesController < ApplicationController
       end
     end
 
-    TicketJob.perform_later(@raffle.id,  @raffle.kind)
+    TicketJob.perform_later(@raffle)
   end
 
   # PATCH/PUT /raffles/1 or /raffles/1.json
