@@ -63,3 +63,4 @@ gem 'sidekiq'
 gem 'will_paginate', '~> 3.1.0'
 gem 'will_paginate-bootstrap4'
 gem 'cocoon'
+gem 'dotenv-rails', groups: [:development, :test]

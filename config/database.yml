@@ -6,24 +6,26 @@
 #
 default: &default
   adapter: postgresql
+  encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: gusta
-  password: 'senha123'
   timeout: 5000
 
 development:
   <<: *default
-  database: raffles_development
-  port: 5433
+  host: <%= ENV['DEV_DATABASE_HOST'] %>
+  port: <%= ENV['DEV_DATABASE_PORT'] %>
+  database: <%= ENV['DEV_DATABASE'] %>
+  username: <%= ENV['DEV_DATABASE_USER'] %>
+  password: <%= ENV['DEV_DATABASE_PASSWORD'] %>
+
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: raffles_test
-  port: 5433
+  database: <%= ENV['DEV_DATABASE_TEST'] %>
+  port: <%= ENV['DEV_DATABASE_PORT'] %>
 
 production:
   <<: *default
-  database: raffles_production
-  port: 5433
+  database: <%= ENV['DATABASE_URL'] %>
